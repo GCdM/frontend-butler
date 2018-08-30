@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import EntryPage from './containers/EntryPage'
 
 class App extends Component {
+
+  signUp = (username, password) => {
+    console.log("SIGNING UP:")
+    console.log("Username: ", username)
+    console.log("Password: ", password)
+  }
+
+  login = (username, password) => {
+    console.log("LOGGING IN:")
+    console.log("Username: ", username)
+    console.log("Password: ", password)
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <EntryPage login={this.login} signUp={this.signUp} />
       </div>
     );
   }
