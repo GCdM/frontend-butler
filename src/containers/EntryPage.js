@@ -10,7 +10,7 @@ class EntryPage extends React.Component {
     return (
       <React.Fragment>
         <h1>Butler</h1>
-        <img src={logo} style={{width: 200}}/>
+        <img src={logo} alt="Butler logo" style={{width: 200}}/>
         <LoginForm action={this.props.login} />
         <SignUpForm action={this.props.signUp} />
         <br/>
