@@ -8,34 +8,70 @@ import { createUser, loginUser } from './adapters/ButlerAPI'
 
 class App extends React.Component {
 
-  postAuth = (data) => {
-    if (data.error) {
-      alert(data.error)
+  state = {
+    current_user: null,
+  }
+
+  logOut = () => {
+    this.setState({
+      current_user: null
+    })
+    this.props.history.push('/')
+    localStorage.removeItem('token')
+  }
+
+  // componentDidMount() {
+  //
+  // }
+
+  state = {
+    current_user: null,
+  }
+
+  postAuth = (userData) => {
+    if (userData.error) {
+      alert(userData.error)
     } else {
-      this.setState({
-        current_user: data
-      }, this.afterLogin)
+      localStorage.setItem('token', userData.token)
+      this.updateCurrentUser(userData.token)
+      this.props.history.push('/home')
     }
   }
 
-  signUp = (username, displayName, password) => {
-    // console.log("SIGNING UP:")
-    // console.log("Username: ", username)
-    // console.log("Password: ", password)
+  signUp = (username, password) => {
     createUser(username, displayName, password)
       .then( this.postAuth )
   }
 
   login = (username, password) => {
-    console.log("LOGGING IN:")
-    console.log("Username: ", username)
-    console.log("Password: ", password)
     loginUser(username, password)
       .then( this.postAuth )
   }
 
-  afterLogin = () => {
-    // this.props.history.push(`/${this.state.username}`)
+  logout = () => {
+    this.setState({
+      current_user: null
+    })
+    this.props.history.push('/login')
+    localStorage.clear()
+  }
+
+  updateCurrentUser = (token) => {
+    getCurrentUser(token).then( userData => {
+      if (userData.error) {
+        this.logout()
+      } else {
+        this.setState({
+          current_user: userData.user_data
+        })
+      }
+    })
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.updateCurrentUser(localStorage.getItem('token'))
+    }
   }
 
   render() {

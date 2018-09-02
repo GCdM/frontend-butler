@@ -6,23 +6,36 @@ const createUser = (username, display_name, password) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: {
-      username,
-      display_name,
-      password,
-    }
+    body: JSON.stringify({
+      user: {
+        username,
+        display_name,
+        password,
+      }
+    })
   }).then( resp => resp.json() )
 }
 
 const loginUser = (username, password) => {
-  return fetch(urlBase + '/users', {
+  return fetch(urlBase + '/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: {
-      username,
-      password,
+    body: JSON.stringify({
+      user: {
+        username,
+        password,
+      }
+    })
+  }).then( resp => resp.json() )
+}
+
+const getCurrentUser = (token) => {
+  return fetch(baseURL + `/current_user`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
     }
   }).then( resp => resp.json() )
 }
@@ -30,4 +43,5 @@ const loginUser = (username, password) => {
 export {
   createUser,
   loginUser,
+  getCurrentUser,
 }
