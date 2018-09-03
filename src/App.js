@@ -19,7 +19,7 @@ class App extends React.Component {
     } else {
       localStorage.setItem('token', userData.token)
       this.updateCurrentUser(userData.token)
-      this.props.history.push('/home')
+      this.props.history.push('/user')
     }
   }
 
@@ -47,7 +47,7 @@ class App extends React.Component {
         this.logout()
       } else {
         this.setState({
-          current_user: userData.user_data
+          current_user: userData
         })
       }
     })
@@ -63,7 +63,7 @@ class App extends React.Component {
     return (
       <div className="App">
       {
-        this.state.current_user ?
+        !this.state.current_user ?
 
         <Route path="/" render={ () => {
           return <EntryPage login={this.login} signUp={this.signUp} />
@@ -72,7 +72,7 @@ class App extends React.Component {
         :
 
         <Route path="/" render={ () => {
-          return <MainPage />
+          return <MainPage logout={this.logout} />
         }} />
       }
 
