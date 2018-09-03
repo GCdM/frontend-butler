@@ -1,17 +1,25 @@
 import React from 'react'
 
-import FeedFactory from './FeedFactory'
+import LeftUserFeed from '../components/LeftUserFeed'
+import RightUserFeed from '../components/RightUserFeed'
 
 class UserPage extends React.Component {
 
+  componentDidMount() {
+    // $('.menu .item')
+    //   .tab()
+    // ;
+  }
+
   render() {
     return (
-      <div className="ui equal width grid">
+      <div className="ui equal width grid container">
+        <div className="row"></div>
         <div className="column">
-          <FeedFactory />
+          <LeftUserFeed />
         </div>
         <div className="column">
-          <FeedFactory />
+          <RightUserFeed />
         </div>
       </div>
     )
