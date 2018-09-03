@@ -10,7 +10,7 @@ class MainPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar />
+        <NavBar logout={this.props.logout} />
         <Switch>
           <Route path="/home" render={ () => {
             return <HouseholdPage />

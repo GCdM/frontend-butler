@@ -24,7 +24,7 @@ class SignUpForm extends React.Component {
         <h2>Sign Up</h2>
         <form onSubmit={ e => {
           e.preventDefault()
-          action(this.state.username, this.state.password)
+          action(this.state.username, this.state.displayName, this.state.password)
         }}>
           <label htmlFor="username">Username</label><br/>
           <input
