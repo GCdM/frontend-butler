@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import logo from '../logo.svg'
 
@@ -9,9 +10,9 @@ const NavBar = (props) => {
         <div className="item">
           <img src={logo} />
         </div>
-        <a className="item">Household</a>
+        <a className="item"><i className="home icon"></i>{props.household.name}</a>
         <div className="right menu">
-          <a className="item">User</a>
+          <a className="item">{props.currentUser.displayName}</a>
           <a className="item" onClick={props.logout}>Log Out</a>
         </div>
       </div>
@@ -19,4 +20,11 @@ const NavBar = (props) => {
   )
 }
 
-export default NavBar
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser,
+    household: state.household,
+  }
+}
+
+export default connect(mapStateToProps)(NavBar)
