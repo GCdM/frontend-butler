@@ -32,7 +32,7 @@ const loginUser = (username, password) => {
 }
 
 const getCurrentUser = (token) => {
-  return fetch(baseURL + `/current_user`, {
+  return fetch(urlBase + `/current_user`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': token
