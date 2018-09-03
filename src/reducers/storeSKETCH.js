@@ -21,6 +21,7 @@ store = {
 
     events: [],
     expenses: [],
+    payments: [],
   },
 
 }

@@ -1,6 +1,7 @@
 const defaultState = {
   events: [],
   expenses: [],
+  payments: [],
 }
 
 export default function(state = defaultState, action) {
