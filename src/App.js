@@ -4,25 +4,10 @@ import { withRouter, Route } from 'react-router-dom'
 
 import './App.css';
 import EntryPage from './containers/EntryPage'
-import { createUser, loginUser } from './adapters/ButlerAPI'
+import MainPage from './containers/MainPage'
+import { createUser, loginUser, getCurrentUser } from './adapters/ButlerAPI'
 
 class App extends React.Component {
-
-  state = {
-    current_user: null,
-  }
-
-  logOut = () => {
-    this.setState({
-      current_user: null
-    })
-    this.props.history.push('/')
-    localStorage.removeItem('token')
-  }
-
-  // componentDidMount() {
-  //
-  // }
 
   state = {
     current_user: null,
@@ -38,7 +23,7 @@ class App extends React.Component {
     }
   }
 
-  signUp = (username, password) => {
+  signUp = (username, displayName, password) => {
     createUser(username, displayName, password)
       .then( this.postAuth )
   }
@@ -52,7 +37,7 @@ class App extends React.Component {
     this.setState({
       current_user: null
     })
-    this.props.history.push('/login')
+    this.props.history.push('/')
     localStorage.clear()
   }
 
@@ -77,9 +62,20 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+      {
+        this.state.current_user ?
+
         <Route path="/" render={ () => {
           return <EntryPage login={this.login} signUp={this.signUp} />
         }} />
+
+        :
+
+        <Route path="/" render={ () => {
+          return <MainPage />
+        }} />
+      }
+
       </div>
     );
   }
