@@ -1,17 +1,13 @@
 import React from 'react';
 import { withRouter, Route } from 'react-router-dom'
-
+import { connect } from 'react-redux'
 
 import './App.css';
 import EntryPage from './containers/EntryPage'
 import MainPage from './containers/MainPage'
-import { createUser, loginUser, getCurrentUser } from './adapters/ButlerAPI'
+import { createUser, loginUser, getCurrentUser, getHouseholdInfo } from './adapters/ButlerAPI'
 
 class App extends React.Component {
-
-  state = {
-    current_user: null,
-  }
 
   postAuth = (userData) => {
     if (userData.error) {
@@ -34,11 +30,9 @@ class App extends React.Component {
   }
 
   logout = () => {
-    this.setState({
-      current_user: null
-    })
-    this.props.history.push('/')
+    this.props.logout()
     localStorage.clear()
+    this.props.history.push('/')
   }
 
   updateCurrentUser = (token) => {
@@ -46,11 +40,15 @@ class App extends React.Component {
       if (userData.error) {
         this.logout()
       } else {
-        this.setState({
-          current_user: userData
-        })
+        this.props.login(userData.data)
+        this.updateCurrentHousehold(userData.data.householdId)
       }
     })
+  }
+
+  updateCurrentHousehold = (householdId) => {
+    getHouseholdInfo(householdId)
+      .then( householdData => this.props.storeHousehold(householdData.data) )
   }
 
   componentDidMount() {
@@ -60,10 +58,11 @@ class App extends React.Component {
   }
 
   render() {
+    console.log("STORE: ", this.props.store)
     return (
       <div className="App">
       {
-        !this.state.current_user ?
+        this.props.currentUser.loggedOut ?
 
         <Route path="/" render={ () => {
           return <EntryPage login={this.login} signUp={this.signUp} />
@@ -81,4 +80,25 @@ class App extends React.Component {
   }
 }
 
-export default withRouter(App);
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser,
+    store: state,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login: (userData) => {
+      dispatch({ type: "LOGIN_USER", payload: userData })
+    },
+    logout: () => {
+      dispatch({ type: "LOGOUT_USER" })
+    },
+    storeHousehold: (householdData) => {
+      dispatch({ type: "SET_HOUSEHOLD", payload: householdData })
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

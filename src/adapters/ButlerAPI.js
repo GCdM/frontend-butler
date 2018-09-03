@@ -1,5 +1,6 @@
 const urlBase = 'http://localhost:3000/api/v1'
 
+//USERS
 const createUser = (username, display_name, password) => {
   return fetch(urlBase + '/users', {
     method: 'POST',
@@ -40,8 +41,25 @@ const getCurrentUser = (token) => {
   }).then( resp => resp.json() )
 }
 
+const getUserInfo = (userId) => {
+
+}
+
+//HOUSEHOLDS
+const createHousehold = (name) => {
+
+}
+
+const getHouseholdInfo = (householdId) => {
+  return fetch(urlBase + `/households/${householdId}`)
+    .then( resp => resp.json() )
+}
+
 export {
   createUser,
   loginUser,
   getCurrentUser,
+  getUserInfo,
+  createHousehold,
+  getHouseholdInfo,
 }

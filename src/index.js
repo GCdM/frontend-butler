@@ -1,9 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import authReducer from './reducers/authReducer'
+import householdReducer from './reducers/householdReducer'
+import userReducer from './reducers/userReducer'
 
-ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
-registerServiceWorker();
+const allReducers = combineReducers({
+  currentUser: authReducer,
+  household: householdReducer,
+  viewedUser: userReducer,
+})
+const store = createStore(allReducers)
+
+ReactDOM.render(<Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>, document.getElementById('root'));
