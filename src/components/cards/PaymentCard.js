@@ -1,8 +1,8 @@
 import React from 'react'
 
-import logo from '../logo.svg'
+import logo from '../../logo.svg'
 
-const ExpenseCard = (props) => {
+const PaymentCard = (props) => {
   return (
     <div className="event">
       <div className="label">
@@ -22,7 +22,7 @@ const ExpenseCard = (props) => {
   )
 }
 
-export default ExpenseCard
+export default PaymentCard
 
 // <div class="event">
 //   <div class="label">

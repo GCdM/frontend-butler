@@ -1,4 +1,5 @@
 import React from 'react'
+import { Form, Button } from 'semantic-ui-react'
 
 class LoginForm extends React.Component {
 
@@ -15,30 +16,35 @@ class LoginForm extends React.Component {
 
   render() {
     const {
-      action,
-    } = this.props
+      username,
+      password,
+    } = this.state
 
     return (
       <React.Fragment>
         <h2>Log In</h2>
-        <form onSubmit={ e => {
+        <Form onSubmit={ (e) => {
           e.preventDefault()
-          action(this.state.username, this.state.password)
+          this.props.action(username, password)
         }}>
-          <input
-            type="text" name="username" placeholder="Username"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
-          <br/><br/>
-          <input
-            type="password" name="password" placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-          <br/><br/>
-          <input type="submit" />
-        </form>
+          <Form.Field>
+            <label>Username</label>
+            <input
+              type="text" name="username"
+              value={username}
+              onChange={this.handleInputChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Password</label>
+            <input
+              type="password" name="password"
+              value={password}
+              onChange={this.handleInputChange}
+              />
+          </Form.Field>
+          <Button type="submit">Submit</Button>
+        </Form>
       </React.Fragment>
     )
   }
