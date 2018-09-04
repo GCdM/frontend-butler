@@ -19,9 +19,13 @@ store = {
 
   viewedUser: {
 
+    // id: 0,
     events: [],
+    responsibilities: [],
     expenses: [],
     payments: [],
   },
 
 }
+
+moment.js - node-package for time stuff

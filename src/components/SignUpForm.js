@@ -1,4 +1,5 @@
 import React from 'react'
+import { Form, Checkbox, Button } from 'semantic-ui-react'
 
 class SignUpForm extends React.Component {
 
@@ -14,41 +15,54 @@ class SignUpForm extends React.Component {
     })
   }
 
+  termsAndConditions = () => {
+    alert("Terms and Conditions: Don't be a dick")
+  }
+
   render() {
     const {
-      action,
-    } = this.props
+      username,
+      displayName,
+      password,
+    } = this.state
 
     return (
       <React.Fragment>
         <h2>Sign Up</h2>
-        <form onSubmit={ e => {
+        <Form onSubmit={ (e) => {
           e.preventDefault()
-          action(this.state.username, this.state.displayName, this.state.password)
+          this.props.action(username, displayName, password)
         }}>
-          <label htmlFor="username">Username</label><br/>
-          <input
-            type="text" name="username" id="username"
-            value={this.state.username}
-            onChange={this.handleInputChange}
-          />
-          <br/><br/>
-          <label htmlFor="displayName">Display Name</label><br/>
-          <input
-            type="text" name="displayName" id="displayName"
-            value={this.state.displayName}
-            onChange={this.handleInputChange}
-          />
-          <br/><br/>
-          <label htmlFor="password">Password</label><br/>
-          <input
-            type="password" name="password" id="password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-          />
-          <br/><br/>
-          <input type="submit" />
-        </form>
+          <Form.Field>
+            <label>Username</label>
+            <input
+              type="text" name="username"
+              value={username}
+              onChange={this.handleInputChange}
+            />
+        </Form.Field>
+          <Form.Field>
+            <label>Display Name</label>
+            <input
+              type="text" name="displayName" id="displayName"
+              value={displayName}
+              onChange={this.handleInputChange}
+            />
+        </Form.Field>
+          <Form.Field>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password" name="password" id="password"
+              value={password}
+              onChange={this.handleInputChange}
+            />
+        </Form.Field>
+          <Form.Field>
+            <Checkbox />
+            <span>  I agree to the <a onClick={this.termsAndConditions}>Terms and Conditions</a></span>
+          </Form.Field>
+          <Button type="submit">Submit</Button>
+        </Form>
       </React.Fragment>
     )
   }

@@ -11,6 +11,9 @@ export default function(state = defaultState, action) {
     case "SET_HOUSEHOLD":
       return action.payload
 
+    case "LOGOUT_USER":
+      return defaultState
+
     default:
       return state
   }

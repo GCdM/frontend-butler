@@ -4,7 +4,7 @@ class HouseholdPage extends React.Component {
 
   render() {
     return (
-      <React.Fragment></React.Fragment>
+      <React.Fragment>HOUSEHOLD PAGE</React.Fragment>
     )
   }
 }
