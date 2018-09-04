@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import './App.css';
 import EntryPage from './containers/EntryPage'
 import MainPage from './containers/MainPage'
-import { createUser, loginUser, getCurrentUser, getHouseholdInfo } from './adapters/ButlerAPI'
+import { createUser, loginUser, getCurrentUser, getHouseholdInfo, getUserInfo } from './adapters/ButlerAPI'
 
 class App extends React.Component {
 
@@ -42,6 +42,7 @@ class App extends React.Component {
       } else {
         this.props.login(userData.data)
         this.updateCurrentHousehold(userData.data.householdId)
+        this.updateViewedUser(userData.data.id)
       }
     })
   }
@@ -49,6 +50,11 @@ class App extends React.Component {
   updateCurrentHousehold = (householdId) => {
     getHouseholdInfo(householdId)
       .then( householdData => this.props.storeHousehold(householdData.data) )
+  }
+
+  updateViewedUser = (userId) => {
+    getUserInfo(userId)
+      .then( userInfo => this.props.storeUserInfo(userInfo.data) )
   }
 
   componentDidMount() {
@@ -97,6 +103,9 @@ function mapDispatchToProps(dispatch) {
     },
     storeHousehold: (householdData) => {
       dispatch({ type: "SET_HOUSEHOLD", payload: householdData })
+    },
+    storeUserInfo: (userInfo) => {
+      dispatch({ type: "SET_USER_INFO", payload: userInfo })
     },
   }
 }

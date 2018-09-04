@@ -42,7 +42,8 @@ const getCurrentUser = (token) => {
 }
 
 const getUserInfo = (userId) => {
-
+  return fetch(urlBase + `/users_info/${userId}`)
+    .then( resp => resp.json() )
 }
 
 //HOUSEHOLDS
