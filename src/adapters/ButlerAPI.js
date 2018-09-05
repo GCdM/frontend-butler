@@ -56,6 +56,25 @@ const getHouseholdInfo = (householdId) => {
     .then( resp => resp.json() )
 }
 
+//EXPENSES
+const createExpense = (userId, title, description, date, amount) => {
+  return fetch(urlBase + `/expenses`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      expense: {
+        user_id: userId,
+        title,
+        description,
+        date,
+        amount,
+      }
+    })
+  }).then( resp => resp.json() )
+}
+
 export {
   createUser,
   loginUser,
@@ -63,4 +82,5 @@ export {
   getUserInfo,
   createHousehold,
   getHouseholdInfo,
+  createExpense,
 }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Menu, Image } from 'semantic-ui-react'
 
 import logo from '../logo.svg'
+import HouseholdForm from '../forms/HouseholdForm'
 
 class NavBar extends React.Component {
   handleItemClick = (e, { name }) => {
@@ -17,11 +18,19 @@ class NavBar extends React.Component {
         <Menu.Item>
           <Image src={logo} size="mini"/>
         </Menu.Item>
-        <Menu.Item
-          name="home"
-          active={path === "/home"}
-          onClick={this.handleItemClick}
-        >{this.props.household.name}</Menu.Item>
+        {
+          this.props.currentUser.householdId ?
+
+          <Menu.Item
+            name="home"
+            active={path === "/home"}
+            onClick={this.handleItemClick}
+          >{this.props.household.name}</Menu.Item>
+
+          :
+
+          <HouseholdForm />
+        }
         <Menu.Menu position="right">
           <Menu.Item
             name="user"
