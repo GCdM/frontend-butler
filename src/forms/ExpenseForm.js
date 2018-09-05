@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Modal, Form, Button } from 'semantic-ui-react'
 
+import { createExpense } from '../adapters/ButlerAPI'
+
 class ExpenseForm extends React.Component {
 
   state = {
@@ -31,7 +33,7 @@ class ExpenseForm extends React.Component {
         <Modal.Content>
           <Form onSubmit={ (e) => {
             e.preventDefault()
-
+            this.props.submit(this.props.userId, title, description, date, amount)
           }}>
             <Form.Field>
               <label>Title</label>
@@ -73,10 +75,19 @@ class ExpenseForm extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state) {
   return {
-
+    userId: state.currentUser.id,
   }
 }
 
-export default connect(null, mapDispatchToProps)(ExpenseForm)
+function mapDispatchToProps(dispatch) {
+  return {
+    submit: (userId, title, description, date, amount) => {
+      createExpense(userId, title, description, date, amount)
+        .then( window.location.reload() )
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm)

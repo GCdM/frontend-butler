@@ -41,10 +41,16 @@ class App extends React.Component {
         this.logout()
       } else {
         this.props.login(userData.data)
-        this.updateCurrentHousehold(userData.data.householdId)
-        this.updateViewedUser(userData.data.id)
+        this.updateStore(userData)
       }
     })
+  }
+
+  updateStore = (userData) => {
+    if (userData.data.householdId) {
+      this.updateCurrentHousehold(userData.data.householdId)
+      this.updateViewedUser(userData.data.id)
+    }
   }
 
   updateCurrentHousehold = (householdId) => {

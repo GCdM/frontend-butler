@@ -4,7 +4,6 @@ import { Segment, Feed, Image } from 'semantic-ui-react'
 import logo from '../../logo.svg'
 
 const PaymentCard = ({ payment }) => {
-
   return (
     <Segment>
       <Feed.Event>
