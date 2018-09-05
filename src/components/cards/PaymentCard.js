@@ -1,46 +1,25 @@
 import React from 'react'
+import { Segment, Feed, Image } from 'semantic-ui-react'
 
 import logo from '../../logo.svg'
 
-const PaymentCard = (props) => {
+const PaymentCard = ({ payment }) => {
+
   return (
-    <div className="event">
-      <div className="label">
-        <img src={logo} />
-      </div>
-      <div className="content">
-        <div className="summary">
-          <a className="user">
-            Gabriel Miranda
-          </a> did something
-          <div className="date">
-            01/01/18
-          </div>
-        </div>
-      </div>
-    </div>
+    <Segment>
+      <Feed.Event>
+        <Feed.Label>
+          <Image size="mini" src={logo} />
+        </Feed.Label>
+        <Feed.Content>
+          <Feed.Date></Feed.Date>
+          <Feed.Summary>
+
+          </Feed.Summary>
+        </Feed.Content>
+      </Feed.Event>
+    </Segment>
   )
 }
 
 export default PaymentCard
-
-// <div class="event">
-//   <div class="label">
-//     <img src="/images/avatar/small/elliot.jpg">
-//   </div>
-//   <div class="content">
-//     <div class="summary">
-//       <a class="user">
-//         Elliot Fu
-//       </a> added you as a friend
-//       <div class="date">
-//         1 Hour Ago
-//       </div>
-//     </div>
-//     <div class="meta">
-//       <a class="like">
-//         <i class="like icon"></i> 4 Likes
-//       </a>
-//     </div>
-//   </div>
-// </div>

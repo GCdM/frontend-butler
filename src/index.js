@@ -17,4 +17,4 @@ const allReducers = combineReducers({
 })
 const store = createStore(allReducers)
 
-ReactDOM.render(<Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>, document.getElementById('root'));
+ReactDOM.render(<BrowserRouter><Provider store={store}><App /></Provider></BrowserRouter>, document.getElementById('root'));

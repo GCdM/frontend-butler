@@ -26,3 +26,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.expense-accordion {
+  margin-bottom: 5px;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
