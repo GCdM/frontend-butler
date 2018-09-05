@@ -1,19 +1,17 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Menu, Image } from 'semantic-ui-react'
 
 import logo from '../logo.svg'
 
 class NavBar extends React.Component {
-  state = {
-    activeItem: 'home'
+  handleItemClick = (e, { name }) => {
+    this.props.history.push(`/${name}`)
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
   render() {
-    const { activeItem } = this.state
-
+    let path = this.props.history.location.pathname
     return (
       <Menu inverted>
         <Menu.Item>
@@ -21,13 +19,13 @@ class NavBar extends React.Component {
         </Menu.Item>
         <Menu.Item
           name="home"
-          active={activeItem === "home"}
+          active={path === "/home"}
           onClick={this.handleItemClick}
         >{this.props.household.name}</Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item
             name="user"
-            active={activeItem === "user"}
+            active={path === "/user"}
             onClick={this.handleItemClick}
           >{this.props.currentUser.displayName}</Menu.Item>
           <Menu.Item
@@ -47,4 +45,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(NavBar)
+export default withRouter(connect(mapStateToProps)(NavBar))

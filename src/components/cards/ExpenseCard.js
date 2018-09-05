@@ -18,7 +18,7 @@ class ExpenseCard extends React.Component {
 
   render() {
     const {
-      user_id,
+      userName,
       title,
       description,
       amount,
@@ -30,8 +30,8 @@ class ExpenseCard extends React.Component {
         <Accordion styled className="expense-accordion">
           <Accordion.Title active={this.state.active} onClick={this.handleDropdown}>
             <Image size="mini" src={logo} floated="left" />
-            {user_id} ---------------
-            {moment(date).format('L')}
+            <span className="float-left">{userName}</span>
+            <span className="float-right">{moment(date).format('L')}</span>
             <br/><br/>
             {title} for £{amount}
             <Icon name="dropdown" />
@@ -45,5 +45,7 @@ class ExpenseCard extends React.Component {
     )
   }
 }
+
+
 
 export default ExpenseCard

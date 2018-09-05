@@ -3,8 +3,7 @@ import { Segment, Feed, Image } from 'semantic-ui-react'
 
 import logo from '../../logo.svg'
 
-const PaymentCard = (props) => {
-  console.log(props.payment)
+const PaymentCard = ({ payment }) => {
 
   return (
     <Segment>

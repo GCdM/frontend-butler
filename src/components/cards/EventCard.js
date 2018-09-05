@@ -1,24 +1,18 @@
 import React from 'react'
+import moment from 'moment'
+import { Segment } from 'semantic-ui-react'
 
 import logo from '../../logo.svg'
 
-const ExpenseCard = (props) => {
+const ExpenseCard = ({ event }) => {
+
   return (
-    <div className="event">
-      <div className="label">
-        <img src={logo} />
-      </div>
-      <div className="content">
-        <div className="summary">
-          <a className="user">
-            Gabriel Miranda
-          </a> did something
-          <div className="date">
-            01/01/18
-          </div>
-        </div>
-      </div>
-    </div>
+    <Segment>
+      <h5 className="float-right">{moment(event.date).format('llll')}</h5>
+      <h3 className="float-left"><b>{event.title}</b></h3>
+      <br/><br/><br/>
+      <h6>{event.description}</h6>
+    </Segment>
   )
 }
 
