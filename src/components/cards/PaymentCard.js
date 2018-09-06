@@ -4,23 +4,38 @@ import { Segment, Feed, Image } from 'semantic-ui-react'
 import moment from 'moment'
 
 const PaymentCard = (props) => {
+  const {
+    userName,
+    userImg,
+    expenseTitle,
+    summary,
+    status,
+    amount,
+  } = props.payment
 
   return (
     <Segment>
-      <Feed.Event>
-        <Feed.Label>
-          <Image size="mini" src={props.currentUserImg} floated="left" rounded/>
-        </Feed.Label>
-        <Feed.Label>
-          <Image size="mini" src={props.payment.userImg} floated="right" rounded/>
-        </Feed.Label>
-        <Feed.Content>
-          <Feed.Summary>
-            {props.payment.summary}
-          </Feed.Summary>
-          <Feed.Date>{moment(props.payment.date).format('LL')}</Feed.Date>
-        </Feed.Content>
-      </Feed.Event>
+      <Feed>
+        <Feed.Event>
+          <Feed.Label>
+            <Image size="mini" src={props.currentUserImg} />
+          </Feed.Label>
+          <Feed.Content>
+            <Feed.Summary>
+              {summary}{amount} to {userName}
+              <br/>
+              for {expenseTitle}
+            </Feed.Summary>
+            <br/>
+            <Feed.Date>
+              {status === "settled" ? moment(props.payment.date).format('LL') : null}
+            </Feed.Date>
+          </Feed.Content>
+          <Feed.Label>
+            <Image size="mini" src={userImg} />
+          </Feed.Label>
+        </Feed.Event>
+      </Feed>
     </Segment>
   )
 }

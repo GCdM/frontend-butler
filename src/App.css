@@ -38,3 +38,9 @@
 .float-right {
   float: right;
 }
+
+.instruction {
+  font-style: italic;
+  font-size: 8pt;
+  color: grey;
+}
