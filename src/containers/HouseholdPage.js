@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Segment, Button } from 'semantic-ui-react'
+import { Container, Segment } from 'semantic-ui-react'
 
 import ExpenseForm from '../forms/ExpenseForm'
 class HouseholdPage extends React.Component {

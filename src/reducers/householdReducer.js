@@ -6,7 +6,7 @@ const defaultState = {
 }
 
 export default function(state = defaultState, action) {
-  // console.log("Household State: ", state)
+  // console.log("Household Action: ", action)
   switch(action.type) {
     case "SET_HOUSEHOLD":
       return action.payload

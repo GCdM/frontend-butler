@@ -2,8 +2,6 @@ import React from 'react'
 import moment from 'moment'
 import { Segment } from 'semantic-ui-react'
 
-import logo from '../../logo.svg'
-
 const ExpenseCard = ({ event }) => {
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Tab, Feed } from 'semantic-ui-react'
+import { Tab } from 'semantic-ui-react'
 
 import ExpenseCard from './cards/ExpenseCard'
 import PaymentCard from './cards/PaymentCard'

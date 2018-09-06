@@ -3,6 +3,7 @@ const defaultState = {
   username: "",
   displayName: "",
   householdId: 0,
+  imgUrl: "",
   loggedOut: true,
 }
 
