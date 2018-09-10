@@ -27,7 +27,7 @@ class ExpenseCard extends React.Component {
       payments,
     } = this.props.expense
 
-    const paymentSummaries = payments.map( payment => <PaymentSummary payment={payment} /> )
+    const paymentSummaries = payments.map( payment => <PaymentSummary payment={payment} housePage={this.props.housePage}/> )
 
     return (
       <React.Fragment>
@@ -45,7 +45,7 @@ class ExpenseCard extends React.Component {
             <br/>
             {paymentSummaries}
             <br/><br/>
-            <p className="instruction">Click on a member above to mark payment as received</p>
+            {this.props.housePage ? null : <p className="instruction">Click on a member above to mark payment as received</p>}
           </Accordion.Content>
         </Accordion>
       </React.Fragment>

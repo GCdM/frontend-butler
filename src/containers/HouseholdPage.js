@@ -1,20 +1,31 @@
 import React from 'react'
-import { Container, Segment } from 'semantic-ui-react'
+import { Container, Segment, Grid } from 'semantic-ui-react'
 
 import ExpenseForm from '../forms/ExpenseForm'
 import EventForm from '../forms/EventForm'
+import LeftHouseFeed from '../components/LeftHouseFeed'
 
 class HouseholdPage extends React.Component {
 
   render() {
     return (
-      <Container>
+      <React.Fragment>
         <Segment>
           <label>Create New:  </label>
           <ExpenseForm />
           <EventForm />
         </Segment>
-      </Container>
+        <Grid columns={2}>
+          <Grid.Row>
+            <Grid.Column>
+              <LeftHouseFeed/>
+            </Grid.Column>
+            <Grid.Column>
+
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </React.Fragment>
     )
   }
 }

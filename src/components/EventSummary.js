@@ -20,7 +20,7 @@ const EventSummary = ({ event }) => {
 
   return (
     <React.Fragment>
-      <Label as="a" image color={color}>
+      <Label image color={color}>
         <img alt="Household Member" src={event.userImg} />
 
         <Icon name={icon} />

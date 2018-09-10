@@ -96,6 +96,24 @@ const rejectEventUser = (eventUserId) => {
   }).then( resp => resp.json() )
 }
 
+const acceptEventUserHouse = (eventUserId) => {
+  return fetch(urlBase + `/event_users/${eventUserId}/accept_house`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then( resp => resp.json() )
+}
+
+const rejectEventUserHouse = (eventUserId) => {
+  return fetch(urlBase + `/event_users/${eventUserId}/reject_house`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then( resp => resp.json() )
+}
+
 //EXPENSES
 const createExpense = (userId, title, description, date, amount) => {
   return fetch(urlBase + `/expenses`, {
@@ -147,6 +165,8 @@ export {
   createEvent,
   acceptEventUser,
   rejectEventUser,
+  acceptEventUserHouse,
+  rejectEventUserHouse,
 
   createExpense,
   togglePaymentReceived,
