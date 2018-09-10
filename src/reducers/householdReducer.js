@@ -2,6 +2,7 @@ const defaultState = {
   id: 0,
   name: "",
   events: [],
+  responsibilities: [],
   expenses: [],
 }
 

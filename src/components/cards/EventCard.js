@@ -4,14 +4,14 @@ import { Segment, Button, Label, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 import EventSummary from '../EventSummary'
-import { acceptEventUser, rejectEventUser } from '../../adapters/ButlerAPI'
+import { acceptEventUser, rejectEventUser, acceptEventUserHouse, rejectEventUserHouse } from '../../adapters/ButlerAPI'
 
 const ExpenseCard = (props) => {
-  const { event } = props
+  const { event, userId, housePage } = props
   const eventSummaries = event.attendance.map( attendance => <EventSummary event={attendance} /> )
 
 
-  const attendance = event.attendance.find( attendance => attendance.userId === props.userId )
+  const attendance = event.attendance.find( attendance => attendance.userId === userId )
 
   return (
     <Segment>
@@ -27,14 +27,14 @@ const ExpenseCard = (props) => {
           <Button icon color="red"
             inverted={attendance.status === "rejected" ? false : true}
             dataId={attendance.id}
-            onClick={props.handleReject}
+            onClick={housePage ? props.handleHouseReject : props.handleReject}
           >
             <Icon name="times circle" />
           </Button>
           <Button icon color="green"
             inverted={attendance.status === "accepted" ? false : true}
             dataId={attendance.id}
-            onClick={props.handleAccept}
+            onClick={housePage ? props.handleHouseAccept : props.handleAccept}
           >
             <Icon name="check circle" />
           </Button>
@@ -57,6 +57,12 @@ function mapDispatchToProps(dispatch) {
     },
     handleReject: (e, { dataId }) => {
       rejectEventUser(dataId).then( userInfo => dispatch({ type: "SET_USER_INFO", payload: userInfo.data }) )
+    },
+    handleHouseAccept: (e, { dataId }) => {
+      acceptEventUserHouse(dataId).then( userInfo => dispatch({ type: "SET_HOUSEHOLD", payload: userInfo.data }) )
+    },
+    handleHouseReject: (e, { dataId }) => {
+      rejectEventUserHouse(dataId).then( userInfo => dispatch({ type: "SET_HOUSEHOLD", payload: userInfo.data }) )
     },
   }
 }
