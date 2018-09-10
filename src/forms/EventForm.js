@@ -23,7 +23,6 @@ class EventForm extends React.Component {
       title,
       description,
       date,
-      amount,
     } = this.state
 
     return (
@@ -32,7 +31,7 @@ class EventForm extends React.Component {
         <Modal.Content>
           <Form onSubmit={ (e) => {
             e.preventDefault()
-            this.props.submit(this.props.householdId, title, description, date, amount)
+            this.props.submit(this.props.householdId, date, title, description)
           }}>
             <Form.Field>
               <label>Date</label>
@@ -74,8 +73,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    submit: (householdId, title, description, date) => {
-      createEvent(householdId, title, description, date)
+    submit: (householdId, date, title, description) => {
+      createEvent(householdId, date, title, description)
         .then( window.location.reload() )
     },
   }
