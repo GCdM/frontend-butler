@@ -27,5 +27,3 @@ store = {
   },
 
 }
-
-moment.js - node-package for time stuff

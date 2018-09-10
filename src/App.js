@@ -77,13 +77,18 @@ class App extends React.Component {
         this.props.currentUser.loggedOut ?
 
         <Route path="/" render={ () => {
-          return <EntryPage login={this.login} signUp={this.signUp} />
+          return <EntryPage
+                    login={this.login}
+                    signUp={this.signUp}
+                  />
         }} />
 
         :
 
         <Route path="/" render={ () => {
-          return <MainPage logout={this.logout} />
+          return <MainPage
+                    logout={this.logout}
+                  />
         }} />
       }
 

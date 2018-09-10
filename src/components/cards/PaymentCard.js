@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Segment, Feed, Image } from 'semantic-ui-react'
+import { Segment, Feed, Image, Button, Icon, Label } from 'semantic-ui-react'
 import moment from 'moment'
+
+import { togglePaymentPaid } from '../../adapters/ButlerAPI'
 
 const PaymentCard = (props) => {
   const {
+    id,
     userName,
     userImg,
     expenseTitle,
@@ -13,16 +16,43 @@ const PaymentCard = (props) => {
     amount,
   } = props.payment
 
+  const mapIcon = {
+    "settled": "check circle",
+    "pending": "circle",
+    "unpaid": "circle outline",
+  }
+
+  const mapColor = {
+    "settled": "green",
+    "pending": "yellow",
+    "unpaid": "orange",
+  }
+
+  const icon = mapIcon[status]
+  const color = mapColor[status]
+
   return (
     <Segment>
       <Feed>
         <Feed.Event>
+          <Button as="div" labelPosition="right">
+            <Button
+              size="mini" color={color} basic
+              dataId={id}
+              onClick={props.handleClick}
+            >
+              Paid
+            </Button>
+            <Label color={color}>
+              <Icon name={icon}/>
+            </Label>
+          </Button>
           <Feed.Label>
             <Image size="mini" src={props.currentUserImg} />
           </Feed.Label>
           <Feed.Content>
             <Feed.Summary>
-              {summary}{amount} to {userName}
+              {summary}{amount} to <a>{userName}</a>
               <br/>
               for {expenseTitle}
             </Feed.Summary>
@@ -46,4 +76,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(PaymentCard)
+function mapDispatchToProps(dispatch) {
+  return {
+    handleClick: (e, { dataId }) => {
+      togglePaymentPaid(dataId).then( userInfo => dispatch({ type: "SET_USER_INFO", payload: userInfo.data }) )
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentCard)
