@@ -51,12 +51,33 @@ const createHousehold = (name) => {
 
 }
 
+const joinHousehold = (householdId) => {
+
+}
+
 const getHouseholdInfo = (householdId) => {
   return fetch(urlBase + `/households/${householdId}`)
     .then( resp => resp.json() )
 }
 
 //EVENTS
+const createEvent = (householdId, date, title, description) => {
+  return fetch(urlBase + `/events`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      event: {
+        household_id: householdId,
+        title,
+        description,
+        date,
+      }
+    })
+  }).then( resp => resp.json() )
+}
+
 const acceptEventUser = (eventUserId) => {
   return fetch(urlBase + `/event_users/${eventUserId}/accept`, {
     method: 'PATCH',
@@ -118,10 +139,15 @@ export {
   loginUser,
   getCurrentUser,
   getUserInfo,
+
   createHousehold,
+  joinHousehold,
   getHouseholdInfo,
+
+  createEvent,
   acceptEventUser,
   rejectEventUser,
+
   createExpense,
   togglePaymentReceived,
   togglePaymentPaid,

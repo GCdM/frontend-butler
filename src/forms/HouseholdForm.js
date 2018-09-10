@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Modal, Form, Button, Divider, Grid } from 'semantic-ui-react'
 
-import { createExpense } from '../adapters/ButlerAPI'
+import { createHousehold, joinHousehold } from '../adapters/ButlerAPI'
 
-class ExpenseForm extends React.Component {
+class HouseholdForm extends React.Component {
 
   state = {
     id: 0,
@@ -80,11 +80,15 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    submit: (userId, title, description, date, amount) => {
-      createExpense(userId, title, description, date, amount)
+    findHousehold: (householdId) => {
+      joinHousehold(householdId)
+        .then( window.location.reload() )
+    },
+    newHousehold: (householdId) => {
+      createHousehold(householdId)
         .then( window.location.reload() )
     },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm)
+export default connect(mapStateToProps, mapDispatchToProps)(HouseholdForm)
