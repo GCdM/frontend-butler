@@ -56,6 +56,25 @@ const getHouseholdInfo = (householdId) => {
     .then( resp => resp.json() )
 }
 
+//EVENTS
+const acceptEventUser = (eventUserId) => {
+  return fetch(urlBase + `/event_users/${eventUserId}/accept`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then( resp => resp.json() )
+}
+
+const rejectEventUser = (eventUserId) => {
+  return fetch(urlBase + `/event_users/${eventUserId}/reject`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then( resp => resp.json() )
+}
+
 //EXPENSES
 const createExpense = (userId, title, description, date, amount) => {
   return fetch(urlBase + `/expenses`, {
@@ -75,6 +94,25 @@ const createExpense = (userId, title, description, date, amount) => {
   }).then( resp => resp.json() )
 }
 
+//PAYMENTS
+const togglePaymentReceived = (paymentId) => {
+  return fetch(urlBase + `/payments/${paymentId}/received`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then( resp => resp.json() )
+}
+
+const togglePaymentPaid = (paymentId) => {
+  return fetch(urlBase + `/payments/${paymentId}/paid`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then( resp => resp.json() )
+}
+
 export {
   createUser,
   loginUser,
@@ -82,5 +120,9 @@ export {
   getUserInfo,
   createHousehold,
   getHouseholdInfo,
+  acceptEventUser,
+  rejectEventUser,
   createExpense,
+  togglePaymentReceived,
+  togglePaymentPaid,
 }

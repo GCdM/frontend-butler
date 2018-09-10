@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment'
 import { Image, Accordion, Icon } from 'semantic-ui-react'
 
+import PaymentSummary from '../PaymentSummary'
+
 class ExpenseCard extends React.Component {
 
   state = {
@@ -22,7 +24,10 @@ class ExpenseCard extends React.Component {
       description,
       amount,
       date,
+      payments,
     } = this.props.expense
+
+    const paymentSummaries = payments.map( payment => <PaymentSummary payment={payment} /> )
 
     return (
       <React.Fragment>
@@ -37,7 +42,10 @@ class ExpenseCard extends React.Component {
           </Accordion.Title>
           <Accordion.Content active={this.state.active}>
             <p>{description}</p>
-            PLACEHOLDER FOR PAYMENTS
+            <br/>
+            {paymentSummaries}
+            <br/><br/>
+            <p className="instruction">Click on a member above to mark payment as received</p>
           </Accordion.Content>
         </Accordion>
       </React.Fragment>
