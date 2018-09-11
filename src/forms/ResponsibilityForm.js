@@ -2,14 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Modal, Form, Button, Icon } from 'semantic-ui-react'
 
-import { createEvent } from '../adapters/ButlerAPI'
+import { createResponsibility } from '../adapters/ButlerAPI'
 
-class EventForm extends React.Component {
+class ResponsibilityForm extends React.Component {
 
   state = {
-    date: "",
     title: "",
-    description: "",
   }
 
   handleInputChange = (event) => {
@@ -21,46 +19,28 @@ class EventForm extends React.Component {
   render() {
     const {
       title,
-      description,
-      date,
     } = this.state
 
     const modalButton = <Button basic animated>
-                          <Button.Content visible>Event</Button.Content>
+                          <Button.Content visible>Responsibility</Button.Content>
                           <Button.Content hidden>
-                            <Icon name="calendar alternate outline" />
+                            <Icon name="clipboard list" />
                           </Button.Content>
                         </Button>
 
     return (
       <Modal trigger={modalButton} centered={false}>
-        <Modal.Header>New Event</Modal.Header>
+        <Modal.Header>New Responsibility</Modal.Header>
         <Modal.Content>
           <Form onSubmit={ (e) => {
             e.preventDefault()
-            this.props.submit(this.props.householdId, date, title, description)
+            this.props.submit(this.props.householdId, title)
           }}>
-            <Form.Field>
-              <label>Date</label>
-              <input
-                type="date" name="date"
-                value={date}
-                onChange={this.handleInputChange}
-                />
-            </Form.Field>
             <Form.Field>
               <label>Title</label>
               <input
                 type="text" name="title"
                 value={title}
-                onChange={this.handleInputChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>Description</label>
-              <input
-                type="text" name="description"
-                value={description}
                 onChange={this.handleInputChange}
               />
             </Form.Field>
@@ -80,11 +60,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    submit: (householdId, date, title, description) => {
-      createEvent(householdId, date, title, description)
+    submit: (householdId, title) => {
+      createResponsibility(householdId, title)
         .then( window.location.reload() )
     },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventForm)
+export default connect(mapStateToProps, mapDispatchToProps)(ResponsibilityForm)

@@ -70,7 +70,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("STORE: ", this.props.store)
     return (
       <div className="App">
       {

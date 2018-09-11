@@ -10,7 +10,7 @@ const LeftHouseFeed = (props) => {
   ]
 
   return (
-    <Tab panes={panes} renderActiveOnly={false} />
+    <Tab menu={{ secondary: true, pointing: true }} panes={panes} renderActiveOnly={false} />
   )
 }
 

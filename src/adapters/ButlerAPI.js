@@ -152,6 +152,39 @@ const togglePaymentPaid = (paymentId) => {
   }).then( resp => resp.json() )
 }
 
+//RESPONSIBILITIES
+const createResponsibility = (householdId, title) => {
+  return fetch(urlBase + `/responsibilities`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      responsibility: {
+        household_id: householdId,
+        title,
+      }
+    })
+  }).then( resp => resp.json() )
+}
+
+const logResponsibility = (responsibilityId, userId, date, description) => {
+  return fetch(urlBase + `/responsibilities/${responsibilityId}/create_log`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      log: {
+        responsibility_id: responsibilityId,
+        user_id: userId,
+        date,
+        description,
+      }
+    })
+  }).then( resp => resp.json() )
+}
+
 export {
   createUser,
   loginUser,
@@ -171,4 +204,7 @@ export {
   createExpense,
   togglePaymentReceived,
   togglePaymentPaid,
+
+  createResponsibility,
+  logResponsibility,
 }

@@ -3,6 +3,7 @@ import { Segment, Grid } from 'semantic-ui-react'
 
 import ExpenseForm from '../forms/ExpenseForm'
 import EventForm from '../forms/EventForm'
+import ResponsibilityForm from '../forms/ResponsibilityForm'
 import LeftHouseFeed from '../components/LeftHouseFeed'
 import RightHouseFeed from '../components/RightHouseFeed'
 
@@ -16,6 +17,7 @@ class HouseholdPage extends React.Component {
           <br/><br/>
           <EventForm />
           <ExpenseForm />
+          <ResponsibilityForm />
         </Segment>
         <Grid columns={4}>
           <Grid.Row>

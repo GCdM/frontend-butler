@@ -1,10 +1,25 @@
 import React from 'react'
+import { Segment, Feed, Image } from 'semantic-ui-react'
+import moment from 'moment'
 
-const ResponsibilityCard = (props) => {
+const ResponsibilityCard = ({ log }) => {
+
   return (
-    <div>
-      HEY
-    </div>
+    <Segment>
+      <Feed>
+        <Feed.Date>
+          {moment(log.date).format('llll')}
+        </Feed.Date>
+        <Feed.Label>
+          <Image size="mini" src={log.userImg} avatar/>
+        </Feed.Label>
+        <Feed.Content>
+          <Feed.Summary>
+            <b>Notes</b>: {log.description}
+          </Feed.Summary>
+        </Feed.Content>
+      </Feed>
+    </Segment>
   )
 }
 

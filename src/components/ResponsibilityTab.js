@@ -1,21 +1,52 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Tab } from 'semantic-ui-react'
+import { Dropdown, Segment } from 'semantic-ui-react'
 
 import ResponsibilityCard from './cards/ResponsibilityCard'
+import ResponsibilityLogForm from '../forms/ResponsibilityLogForm'
 
-const ResponsibilityTab = (props) => {
+class ResponsibilityTab extends React.Component {
 
-  const responsibilityCards = logs => logs.map( log => <ResponsibilityCard log={log} /> )
+  state = {
+    activeResponsibility: {
+      id: 0,
+      title: "",
+      logs: [],
+    },
+  }
 
-  const panes = props.responsibilities.map( responsibility => {
-    return { menuItem: responsibility.title, pane: responsibilityCards(responsibility.logs) }
-  })
+  handleChange = (e, { value }) => {
+    this.setState({
+      activeResponsibility: value,
+    })
+  }
 
+  dropdownOptions = () => {
+    return this.props.responsibilities.map( responsibility => {
+      return {
+        text: responsibility.title,
+        value: responsibility,
+      }
+    })
+  }
 
-  return (
-    <Tab menu={{ fluid: true, vertical: true, tabular: 'right' }} panes={panes} renderActiveOnly={false} />
-  )
+  render() {
+    const logs = this.state.activeResponsibility.logs.map( log => <ResponsibilityCard log={log} /> )
+
+    return (
+      <Segment>
+        <Dropdown selection
+          text={this.state.activeResponsibility.title || "Select Responsibility"}
+          options={this.dropdownOptions()}
+          onChange={this.handleChange}
+        >
+        </Dropdown>
+        <ResponsibilityLogForm responsibility={this.state.activeResponsibility} />
+        <br/><br/>
+        {logs}
+      </Segment>
+    )
+  }
 }
 
 function mapStateToProps(state) {
@@ -23,4 +54,5 @@ function mapStateToProps(state) {
     responsibilities: state.household.responsibilities,
   }
 }
+
 export default connect(mapStateToProps)(ResponsibilityTab)
