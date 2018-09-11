@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import moment from 'moment'
 import { Image, Accordion, Icon } from 'semantic-ui-react'
 
@@ -45,7 +46,7 @@ class ExpenseCard extends React.Component {
             <br/>
             {paymentSummaries}
             <br/><br/>
-            {this.props.housePage ? null : <p className="instruction">Click on a member above to mark payment as received</p>}
+            {this.props.housePage || this.props.currentUserId !== this.props.viewedUserId ? null : <p className="instruction">Click on a member above to mark payment as received</p>}
           </Accordion.Content>
         </Accordion>
       </React.Fragment>
@@ -53,6 +54,12 @@ class ExpenseCard extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    currentUserId: state.currentUser.id,
+    viewedUserId: state.viewedUser.id,
+  }
+}
 
 
-export default ExpenseCard
+export default connect(mapStateToProps)(ExpenseCard)

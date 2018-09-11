@@ -19,7 +19,9 @@ store = {
 
   viewedUser: {
 
-    // id: 0,
+    id: 0,
+    displayName: "",
+    imgUrl: "",
     events: [],
     responsibilities: [],
     expenses: [],

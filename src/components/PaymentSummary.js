@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Label, Icon } from 'semantic-ui-react'
 import { togglePaymentReceived } from '../adapters/ButlerAPI'
 
-const PaymentSummary = ({ payment, handleClick, housePage }) => {
+const PaymentSummary = ({ payment, handleClick, housePage, currentUserId, viewedUserId }) => {
 
   const mapIcon = {
     "settled": "check circle",
@@ -23,8 +23,8 @@ const PaymentSummary = ({ payment, handleClick, housePage }) => {
 
   return (
     <React.Fragment>
-      <Label as={housePage ? "div" : "a"} image color={color}
-        onClick={housePage ? null : handleClick}
+      <Label as={(housePage || currentUserId !== viewedUserId) ? "div" : "a"} image color={color}
+        onClick={(housePage || currentUserId !== viewedUserId) ? null : handleClick}
         dataId={payment.id}
       >
         <img alt="Household Member" src={payment.userImg} />
@@ -35,12 +35,20 @@ const PaymentSummary = ({ payment, handleClick, housePage }) => {
   )
 }
 
+function mapStateToProps(state) {
+  return {
+    currentUserId: state.currentUser.id,
+    viewedUserId: state.viewedUser.id,
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     handleClick: (e, { dataId }) => {
+      console.log("HIT")
       togglePaymentReceived(dataId).then( userInfo => dispatch({ type: "SET_USER_INFO", payload: userInfo.data }) )
     },
   }
 }
 
-export default connect(null, mapDispatchToProps)(PaymentSummary)
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentSummary)

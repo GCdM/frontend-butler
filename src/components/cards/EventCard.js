@@ -7,11 +7,11 @@ import EventSummary from '../EventSummary'
 import { acceptEventUser, rejectEventUser, acceptEventUserHouse, rejectEventUserHouse } from '../../adapters/ButlerAPI'
 
 const ExpenseCard = (props) => {
-  const { event, userId, housePage } = props
+  const { event, currentUserId, viewedUserId, housePage } = props
   const eventSummaries = event.attendance.map( attendance => <EventSummary event={attendance} /> )
 
 
-  const attendance = event.attendance.find( attendance => attendance.userId === userId )
+  const attendance = event.attendance.find( attendance => attendance.userId === currentUserId )
 
   return (
     <Segment>
@@ -21,32 +21,41 @@ const ExpenseCard = (props) => {
       <h6>{event.description}</h6>
       {eventSummaries}
       <br/><br/>
-      <Button as="div" labelPosition="left">
-        <Label as="a">Attending:</Label>
-        <Button.Group>
-          <Button icon color="red"
-            inverted={attendance.status === "rejected" ? false : true}
-            dataId={attendance.id}
-            onClick={housePage ? props.handleHouseReject : props.handleReject}
-          >
-            <Icon name="times circle" />
-          </Button>
-          <Button icon color="green"
-            inverted={attendance.status === "accepted" ? false : true}
-            dataId={attendance.id}
-            onClick={housePage ? props.handleHouseAccept : props.handleAccept}
-          >
-            <Icon name="check circle" />
-          </Button>
-        </Button.Group>
-      </Button>
+      {
+        currentUserId === viewedUserId ?
+
+        <Button as="div" labelPosition="left">
+          <Label>Attending:</Label>
+          <Button.Group>
+            <Button icon color="red"
+              inverted={attendance.status === "rejected" ? false : true}
+              dataId={attendance.id}
+              onClick={housePage ? props.handleHouseReject : props.handleReject}
+            >
+              <Icon name="times circle" />
+            </Button>
+            <Button icon color="green"
+              inverted={attendance.status === "accepted" ? false : true}
+              dataId={attendance.id}
+              onClick={housePage ? props.handleHouseAccept : props.handleAccept}
+            >
+              <Icon name="check circle" />
+            </Button>
+          </Button.Group>
+        </Button>
+
+        :
+
+        null
+      }
     </Segment>
   )
 }
 
 function mapStateToProps(state) {
   return {
-    userId: state.currentUser.id,
+    currentUserId: state.currentUser.id,
+    viewedUserId: state.viewedUser.id,
   }
 }
 

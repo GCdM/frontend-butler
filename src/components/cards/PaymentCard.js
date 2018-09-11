@@ -48,7 +48,7 @@ const PaymentCard = (props) => {
             </Label>
           </Button>
           <Feed.Label>
-            <Image size="mini" src={props.currentUserImg} />
+            <Image size="mini" src={props.viewedUserImg} />
           </Feed.Label>
           <Feed.Content>
             <Feed.Summary>
@@ -72,7 +72,7 @@ const PaymentCard = (props) => {
 
 function mapStateToProps(state) {
   return {
-    currentUserImg: state.currentUser.imgUrl,
+    viewedUserImg: state.viewedUser.imgUrl,
   }
 }
 

@@ -18,6 +18,9 @@ class MainPage extends React.Component {
           <Route path="/user" render={ () => {
             return <UserPage />
           }} />
+          <Route path="/housemate" render={ () => {
+            return <UserPage />
+          }} />
           <Redirect to="/user" />
         </Switch>
       </React.Fragment>

@@ -1,38 +1,31 @@
 import React from 'react'
 import { Segment, Grid } from 'semantic-ui-react'
-import Calendar from 'react-calendar'
 
 import ExpenseForm from '../forms/ExpenseForm'
 import EventForm from '../forms/EventForm'
 import LeftHouseFeed from '../components/LeftHouseFeed'
 
 class HouseholdPage extends React.Component {
-  state = {
-    date: new Date(),
-  }
-
-  calendarChange = date => this.setState({ date })
 
   render() {
     return (
       <React.Fragment>
         <Segment>
-          <label>Create New:  </label>
-          <ExpenseForm />
+          <label>Create New</label>
+          <br/><br/>
           <EventForm />
+          <ExpenseForm />
         </Segment>
-        <Grid columns={2}>
+        <Grid columns={4}>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column width={1}></Grid.Column>
+            <Grid.Column width={7}>
               <LeftHouseFeed/>
             </Grid.Column>
-            <Grid.Column>
-              <Calendar
-                value={this.state.date}
-                onChange={this.calendarChange}
-                minDetail="year"
-              />
+            <Grid.Column width={7}>
+
             </Grid.Column>
+            <Grid.Column width={1}></Grid.Column>
           </Grid.Row>
         </Grid>
       </React.Fragment>

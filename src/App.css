@@ -31,6 +31,10 @@
   margin-bottom: 5px;
 }
 
+.ui.segment.center {
+  margin: auto;
+}
+
 .float-left {
   float: left;
 }

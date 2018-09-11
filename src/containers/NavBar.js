@@ -5,9 +5,14 @@ import { Menu, Image, Icon } from 'semantic-ui-react'
 
 import logo from '../logo.svg'
 import HouseholdForm from '../forms/HouseholdForm'
+import MembersDropdown from '../components/MembersDropdown'
+import { getUserInfo } from '../adapters/ButlerAPI'
 
 class NavBar extends React.Component {
   handleItemClick = (e, { name }) => {
+    getUserInfo(this.props.currentUser.id)
+      .then( userInfo => this.props.storeUserInfo(userInfo.data) )
+
     this.props.history.push(`/${name}`)
   }
 
@@ -21,16 +26,22 @@ class NavBar extends React.Component {
         {
           this.props.currentUser.householdId ?
 
-          <Menu.Item
-            name="home"
-            active={path === "/home"}
-            onClick={this.handleItemClick}
-          ><Icon name="home"/>{this.props.household.name}</Menu.Item>
+          <React.Fragment>
+            <Menu.Item
+              name="home"
+              active={path === "/home"}
+              onClick={this.handleItemClick}
+            ><Icon name="home"/>{this.props.household.name}</Menu.Item>
+            <Menu.Item active={path === "/housemate"} >
+              <MembersDropdown history={this.props.history}/>
+            </Menu.Item>
+          </React.Fragment>
 
           :
 
           <HouseholdForm />
         }
+
         <Menu.Menu position="right">
           <Menu.Item
             name="user"
@@ -54,4 +65,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(NavBar))
+function mapDispatchToProps(dispatch) {
+  return {
+    storeUserInfo: (userInfo) => {
+      dispatch({ type: "SET_USER_INFO", payload: userInfo })
+    },
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))
