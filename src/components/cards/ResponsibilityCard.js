@@ -1,11 +1,11 @@
 import React from 'react'
 
-const ExpenseCard = (props) => {
+const ResponsibilityCard = (props) => {
   return (
     <div>
-
+      HEY
     </div>
   )
 }
 
-export default ExpenseCard
+export default ResponsibilityCard
