@@ -34,7 +34,7 @@ class ExpenseCard extends React.Component {
       <React.Fragment>
         <Accordion styled className="expense-accordion">
           <Accordion.Title active={this.state.active} onClick={this.handleDropdown}>
-            <Image size="mini" src={userImg} floated="left" rounded/>
+            <Image size="mini" src={userImg} floated="left" avatar/>
             <span className="float-left">{userName}</span>
             <span className="float-right">{moment(date).format('L')}</span>
             <br/><br/>

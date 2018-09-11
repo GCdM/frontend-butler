@@ -2,13 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Modal, Form, Button, Icon } from 'semantic-ui-react'
 
-import { createEvent } from '../adapters/ButlerAPI'
+import { logResponsibility } from '../adapters/ButlerAPI'
 
-class EventForm extends React.Component {
+class ResponsibilityLogForm extends React.Component {
 
   state = {
     date: "",
-    title: "",
     description: "",
   }
 
@@ -20,25 +19,24 @@ class EventForm extends React.Component {
 
   render() {
     const {
-      title,
-      description,
       date,
+      description,
     } = this.state
 
-    const modalButton = <Button basic animated>
-                          <Button.Content visible>Event</Button.Content>
+    const modalButton = <Button basic animated disabled={this.props.responsibility.id === 0 ? true : false}>
+                          <Button.Content visible>Create Log</Button.Content>
                           <Button.Content hidden>
-                            <Icon name="calendar alternate outline" />
+                            <Icon name="list ul" />
                           </Button.Content>
                         </Button>
 
     return (
       <Modal trigger={modalButton} centered={false}>
-        <Modal.Header>New Event</Modal.Header>
+        <Modal.Header>New Log for {this.props.responsibility.title}</Modal.Header>
         <Modal.Content>
           <Form onSubmit={ (e) => {
             e.preventDefault()
-            this.props.submit(this.props.householdId, date, title, description)
+            this.props.submit(this.props.responsibility.id, this.props.currentUserId, date, description)
           }}>
             <Form.Field>
               <label>Date</label>
@@ -46,18 +44,10 @@ class EventForm extends React.Component {
                 type="date" name="date"
                 value={date}
                 onChange={this.handleInputChange}
-                />
-            </Form.Field>
-            <Form.Field>
-              <label>Title</label>
-              <input
-                type="text" name="title"
-                value={title}
-                onChange={this.handleInputChange}
               />
             </Form.Field>
             <Form.Field>
-              <label>Description</label>
+              <label>Notes</label>
               <input
                 type="text" name="description"
                 value={description}
@@ -74,17 +64,17 @@ class EventForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    householdId: state.household.id,
+    currentUserId: state.currentUser.id,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    submit: (householdId, date, title, description) => {
-      createEvent(householdId, date, title, description)
+    submit: (responsibilityId, userId, date, description) => {
+      logResponsibility(responsibilityId, userId, date, description)
         .then( window.location.reload() )
     },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventForm)
+export default connect(mapStateToProps, mapDispatchToProps)(ResponsibilityLogForm)

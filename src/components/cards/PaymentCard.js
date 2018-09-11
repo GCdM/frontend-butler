@@ -48,7 +48,7 @@ const PaymentCard = (props) => {
             </Label>
           </Button>
           <Feed.Label>
-            <Image size="mini" src={props.viewedUserImg} />
+            <Image size="mini" src={props.viewedUserImg} avatar/>
           </Feed.Label>
           <Feed.Content>
             <Feed.Summary>
@@ -62,7 +62,7 @@ const PaymentCard = (props) => {
             </Feed.Date>
           </Feed.Content>
           <Feed.Label>
-            <Image size="mini" src={userImg} />
+            <Image size="mini" src={userImg} avatar/>
           </Feed.Label>
         </Feed.Event>
       </Feed>
