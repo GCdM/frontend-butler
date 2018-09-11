@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Modal, Form, Button } from 'semantic-ui-react'
+import { Modal, Form, Button, Icon } from 'semantic-ui-react'
 
 import { createEvent } from '../adapters/ButlerAPI'
 
@@ -25,8 +25,15 @@ class EventForm extends React.Component {
       date,
     } = this.state
 
+    const modalButton = <Button basic animated>
+                          <Button.Content visible>Events</Button.Content>
+                          <Button.Content hidden>
+                            <Icon name="calendar alternate outline" />
+                          </Button.Content>
+                        </Button>
+
     return (
-      <Modal trigger={<Button>Event</Button>} centered={false}>
+      <Modal trigger={modalButton} centered={false}>
         <Modal.Header>New Event</Modal.Header>
         <Modal.Content>
           <Form onSubmit={ (e) => {

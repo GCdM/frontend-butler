@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Modal, Form, Button } from 'semantic-ui-react'
+import { Modal, Form, Button, Icon } from 'semantic-ui-react'
 
 import { createExpense } from '../adapters/ButlerAPI'
 
@@ -27,8 +27,15 @@ class ExpenseForm extends React.Component {
       amount,
     } = this.state
 
+    const modalButton = <Button basic animated>
+                          <Button.Content visible>Expense</Button.Content>
+                          <Button.Content hidden>
+                            <Icon name="dollar" />
+                          </Button.Content>
+                        </Button>
+
     return (
-      <Modal trigger={<Button>Expense</Button>} centered={false}>
+      <Modal trigger={modalButton} centered={false}>
         <Modal.Header>New Expense</Modal.Header>
         <Modal.Content>
           <Form onSubmit={ (e) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Segment, Grid } from 'semantic-ui-react'
+import { Segment, Grid } from 'semantic-ui-react'
 
 import ExpenseForm from '../forms/ExpenseForm'
 import EventForm from '../forms/EventForm'
@@ -11,18 +11,21 @@ class HouseholdPage extends React.Component {
     return (
       <React.Fragment>
         <Segment>
-          <label>Create New:  </label>
-          <ExpenseForm />
+          <label>Create New</label>
+          <br/><br/>
           <EventForm />
+          <ExpenseForm />
         </Segment>
-        <Grid columns={2}>
+        <Grid columns={4}>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column width={1}></Grid.Column>
+            <Grid.Column width={7}>
               <LeftHouseFeed/>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column width={7}>
 
             </Grid.Column>
+            <Grid.Column width={1}></Grid.Column>
           </Grid.Row>
         </Grid>
       </React.Fragment>
