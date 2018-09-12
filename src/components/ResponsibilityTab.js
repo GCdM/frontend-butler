@@ -33,7 +33,7 @@ class ResponsibilityTab extends React.Component {
     const logs = this.state.activeResponsibility.logs.map( log => <ResponsibilityCard log={log} /> )
 
     return (
-      <Segment>
+      <React.Fragment>
         <Dropdown selection
           text={this.state.activeResponsibility.title || "Select Responsibility"}
           options={this.dropdownOptions()}
@@ -43,7 +43,7 @@ class ResponsibilityTab extends React.Component {
         <ResponsibilityLogForm responsibility={this.state.activeResponsibility} />
         <br/><br/>
         {logs}
-      </Segment>
+      </React.Fragment>
     )
   }
 }

@@ -12,11 +12,11 @@ const LeftUserFeed = (props) => {
 
   const panes = [
     { menuItem: 'Events', pane: eventCards },
-    { menuItem: 'Responsibilities', pane: <ResponsibilityTab responsibilities={props.responsibilities} /> },
+    { menuItem: 'Responsibilities', pane: [<ResponsibilityTab responsibilities={props.responsibilities} />] },
   ]
 
   return (
-    <Tab panes={panes} renderActiveOnly={false} />
+    <Tab menu={{ pointing: true }} panes={panes} renderActiveOnly={false} />
   )
 }
 

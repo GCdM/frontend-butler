@@ -39,7 +39,7 @@ class NavBar extends React.Component {
 
           :
 
-          <HouseholdForm />
+          <HouseholdForm history={this.props.history}/>
         }
 
         <Menu.Menu position="right">

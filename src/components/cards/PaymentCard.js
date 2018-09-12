@@ -32,22 +32,27 @@ const PaymentCard = (props) => {
   const color = mapColor[status]
 
   return (
-    <Segment>
+    <Segment color={color}>
       <Feed>
         <Feed.Event>
-          <Button as="div" labelPosition="right">
-            <Button
-              size="mini" color={color} basic
-              dataId={id}
-              onClick={props.handleClick}
-              disabled={ props.currentUserId === props.viewedUserId ? false : true }
-            >
-              Paid
+          {
+            props.currentUserId === props.viewedUserId
+            ?
+            <Button as="div" labelPosition="right">
+              <Button
+                size="mini" color={color} basic
+                dataId={id}
+                onClick={props.handleClick}
+                >
+                Paid
+              </Button>
+              <Label color={color}>
+                <Icon name={icon}/>
+              </Label>
             </Button>
-            <Label color={color}>
-              <Icon name={icon}/>
-            </Label>
-          </Button>
+            :
+            null
+          }
           <Feed.Label>
             <Image size="mini" src={props.viewedUserImg} avatar/>
           </Feed.Label>

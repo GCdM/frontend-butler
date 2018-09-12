@@ -1,5 +1,6 @@
 import React from 'react'
-import { Segment, Grid } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Container, Segment, Grid, Icon } from 'semantic-ui-react'
 
 import ExpenseForm from '../forms/ExpenseForm'
 import EventForm from '../forms/EventForm'
@@ -12,13 +13,17 @@ class HouseholdPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Segment>
-          <label>Create New</label>
-          <br/><br/>
-          <EventForm />
-          <ExpenseForm />
-          <ResponsibilityForm />
-        </Segment>
+        <Container>
+          <Segment>
+            <h4>{this.props.householdName}</h4>
+            <Icon size="big" name="home" />
+            <br/><br/>
+            <EventForm />
+            <ExpenseForm />
+            <ResponsibilityForm />
+          </Segment>
+        </Container>
+        <br/>
         <Grid columns={4}>
           <Grid.Row>
             <Grid.Column width={1}></Grid.Column>
@@ -36,4 +41,10 @@ class HouseholdPage extends React.Component {
   }
 }
 
-export default HouseholdPage
+function mapStateToProps(state) {
+  return {
+    householdName: state.household.name,
+  }
+}
+
+export default connect(mapStateToProps)(HouseholdPage)

@@ -2,12 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
 
-import ResponsibilityTab from './ResponsibilityTab'
+import ExpenseCard from './cards/ExpenseCard'
 
 const LeftHouseFeed = (props) => {
 
+  const expenseCards = props.expenses.map( expense => <ExpenseCard expense={expense} housePage={true} /> )
+
   const panes = [
-    { menuItem: 'Responsibilities', pane: <ResponsibilityTab responsibilities={props.responsibilities}/> },
+    { menuItem: 'Expenses', pane: expenseCards },
   ]
 
   return (
@@ -17,7 +19,7 @@ const LeftHouseFeed = (props) => {
 
 function mapStateToProps(state) {
   return {
-    responsibilities: state.household.responsibilities
+    expenses: state.household.expenses,
   }
 }
 

@@ -28,7 +28,10 @@ class ExpenseForm extends React.Component {
     } = this.state
 
     const modalButton = <Button basic animated>
-                          <Button.Content visible>Expense</Button.Content>
+                          <Button.Content visible>
+                            <Icon name="plus circle" />
+                            Expense
+                          </Button.Content>
                           <Button.Content hidden>
                             <Icon name="dollar" />
                           </Button.Content>
@@ -67,7 +70,7 @@ class ExpenseForm extends React.Component {
               />
             </Form.Field>
             <Form.Field>
-              <label>Amount</label>
+              <label>Amount (£)</label>
               <input
                 type="number" name="amount"
                 value={amount}

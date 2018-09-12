@@ -26,7 +26,10 @@ class EventForm extends React.Component {
     } = this.state
 
     const modalButton = <Button basic animated>
-                          <Button.Content visible>Event</Button.Content>
+                          <Button.Content visible>
+                            <Icon name="plus circle" />
+                            Event
+                          </Button.Content>
                           <Button.Content hidden>
                             <Icon name="calendar alternate outline" />
                           </Button.Content>
