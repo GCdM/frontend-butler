@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Dropdown, Segment } from 'semantic-ui-react'
 
 import ResponsibilityCard from './cards/ResponsibilityCard'
@@ -49,10 +48,4 @@ class ResponsibilityTab extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    responsibilities: state.household.responsibilities,
-  }
-}
-
-export default connect(mapStateToProps)(ResponsibilityTab)
+export default ResponsibilityTab

@@ -40,6 +40,7 @@ const PaymentCard = (props) => {
               size="mini" color={color} basic
               dataId={id}
               onClick={props.handleClick}
+              disabled={ props.currentUserId === props.viewedUserId ? false : true }
             >
               Paid
             </Button>
@@ -72,6 +73,8 @@ const PaymentCard = (props) => {
 
 function mapStateToProps(state) {
   return {
+    currentUserId: state.currentUser.id,
+    viewedUserId: state.viewedUser.id,
     viewedUserImg: state.viewedUser.imgUrl,
   }
 }

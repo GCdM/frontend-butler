@@ -4,15 +4,15 @@ import { Tab } from 'semantic-ui-react'
 
 import EventCard from './cards/EventCard'
 import ResponsibilityCard from './cards/ResponsibilityCard'
+import ResponsibilityTab from './ResponsibilityTab'
 
 const LeftUserFeed = (props) => {
 
   const eventCards = props.events.map( event => <EventCard event={event} /> )
-  const responsibilityCards = props.responsibilities.map( responsibility => <ResponsibilityCard responsibility={responsibility} /> )
 
   const panes = [
     { menuItem: 'Events', pane: eventCards },
-    { menuItem: 'Responsibilities', pane: responsibilityCards },
+    { menuItem: 'Responsibilities', pane: <ResponsibilityTab responsibilities={props.responsibilities} /> },
   ]
 
   return (
