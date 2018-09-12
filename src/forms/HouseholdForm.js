@@ -53,6 +53,7 @@ class HouseholdForm extends React.Component {
             <Grid.Column>
               <Form onSubmit={ (e) => {
                   e.preventDefault()
+                  this.props.history.push("/home")
                   this.props.newHousehold(name, this.props.userId)
                 }}>
                 <Form.Field>

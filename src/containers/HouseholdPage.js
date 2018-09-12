@@ -1,5 +1,6 @@
 import React from 'react'
-import { Container, Segment, Grid } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Container, Segment, Grid, Icon } from 'semantic-ui-react'
 
 import ExpenseForm from '../forms/ExpenseForm'
 import EventForm from '../forms/EventForm'
@@ -14,7 +15,8 @@ class HouseholdPage extends React.Component {
       <React.Fragment>
         <Container>
           <Segment>
-            <label>Create New</label>
+            <h4>{this.props.householdName}</h4>
+            <Icon size="big" name="home" />
             <br/><br/>
             <EventForm />
             <ExpenseForm />
@@ -39,4 +41,10 @@ class HouseholdPage extends React.Component {
   }
 }
 
-export default HouseholdPage
+function mapStateToProps(state) {
+  return {
+    householdName: state.household.name,
+  }
+}
+
+export default connect(mapStateToProps)(HouseholdPage)

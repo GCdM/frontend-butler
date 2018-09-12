@@ -22,7 +22,7 @@ const MembersDropdown = (props) => {
 
   return (
     <Dropdown
-      text="Select Housemate"
+      text="Members"
       options={dropdownOptions}
       onChange={handleChange}
     >

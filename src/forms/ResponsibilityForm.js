@@ -22,7 +22,10 @@ class ResponsibilityForm extends React.Component {
     } = this.state
 
     const modalButton = <Button basic animated>
-                          <Button.Content visible>Responsibility</Button.Content>
+                          <Button.Content visible>
+                            <Icon name="plus circle" />
+                            Responsibility
+                          </Button.Content>
                           <Button.Content hidden>
                             <Icon name="clipboard list" />
                           </Button.Content>
