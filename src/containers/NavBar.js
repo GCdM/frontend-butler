@@ -31,7 +31,7 @@ class NavBar extends React.Component {
               name="home"
               active={path === "/home"}
               onClick={this.handleItemClick}
-            ><Icon name="home"/>{this.props.household.name} <i>(ID {this.props.household.id})</i></Menu.Item>
+            ><Icon name="home"/>{this.props.household.name} &nbsp; <i>(ID {this.props.household.id})</i></Menu.Item>
             <Menu.Item active={path === "/housemate"} >
               <MembersDropdown history={this.props.history}/>
             </Menu.Item>

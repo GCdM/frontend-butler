@@ -8,7 +8,7 @@ const ResponsibilityCard = ({ log }) => {
     <Segment>
       <Feed>
         <Feed.Date>
-          {moment(log.date).format('llll')}
+          {moment(log.date).format('ll')}
         </Feed.Date>
         <Feed.Label>
           <Image size="mini" src={log.userImg} avatar/>
