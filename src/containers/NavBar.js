@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Menu, Image, Icon } from 'semantic-ui-react'
+import { Menu, Image, Icon, Button } from 'semantic-ui-react'
 
 import logo from '../logo.svg'
 import HouseholdForm from '../forms/HouseholdForm'
@@ -31,7 +31,17 @@ class NavBar extends React.Component {
               name="home"
               active={path === "/home"}
               onClick={this.handleItemClick}
-            ><Icon name="home"/>{this.props.household.name} &nbsp; <i>(ID {this.props.household.id})</i></Menu.Item>
+            ><Icon name="home"/>{this.props.household.name}</Menu.Item>
+            <Menu.Item>
+              <Button animated color="grey">
+                <Button.Content visible>
+                  House Key
+                </Button.Content>
+                <Button.Content hidden>
+                  {this.props.household.key}
+                </Button.Content>
+              </Button>
+            </Menu.Item>
             <Menu.Item active={path === "/housemate"} >
               <MembersDropdown history={this.props.history}/>
             </Menu.Item>

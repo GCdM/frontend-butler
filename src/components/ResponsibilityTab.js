@@ -1,5 +1,6 @@
 import React from 'react'
-import { Dropdown, Segment } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Dropdown } from 'semantic-ui-react'
 
 import ResponsibilityCard from './cards/ResponsibilityCard'
 import ResponsibilityLogForm from '../forms/ResponsibilityLogForm'
@@ -40,7 +41,13 @@ class ResponsibilityTab extends React.Component {
           onChange={this.handleChange}
         >
         </Dropdown>
-        <ResponsibilityLogForm responsibility={this.state.activeResponsibility} />
+        {
+          this.props.currentUserId === this.props.viewedUserId
+          ?
+          <ResponsibilityLogForm responsibility={this.state.activeResponsibility} />
+          :
+          null
+        }
         <br/><br/>
         {logs}
       </React.Fragment>
@@ -48,4 +55,11 @@ class ResponsibilityTab extends React.Component {
   }
 }
 
-export default ResponsibilityTab
+function mapStateToProps(state) {
+  return {
+    currentUserId: state.currentUser.id,
+    viewedUserId: state.viewedUser.id,
+  }
+}
+
+export default connect(mapStateToProps)(ResponsibilityTab)

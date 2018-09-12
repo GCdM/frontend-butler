@@ -47,7 +47,7 @@ const getUserInfo = (userId) => {
 }
 
 //HOUSEHOLDS
-const createHousehold = (name, userId) => {
+const createHousehold = (name, userId, key) => {
   return fetch(urlBase + `/households`, {
     method: 'POST',
     headers: {
@@ -56,14 +56,15 @@ const createHousehold = (name, userId) => {
     body: JSON.stringify({
       household: {
         name,
+        key,
       },
       user_id: userId,
     })
   }).then( resp => resp.json() )
 }
 
-const joinHousehold = (householdId, userId) => {
-  return fetch(urlBase + `/households/${householdId}/${userId}`, {
+const joinHousehold = (userId, key) => {
+  return fetch(urlBase + `/users/${userId}/${key}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

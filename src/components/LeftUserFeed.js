@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
 
 import EventCard from './cards/EventCard'
-import ResponsibilityCard from './cards/ResponsibilityCard'
 import ResponsibilityTab from './ResponsibilityTab'
 
 const LeftUserFeed = (props) => {

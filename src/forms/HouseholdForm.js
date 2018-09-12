@@ -7,7 +7,8 @@ import { createHousehold, joinHousehold } from '../adapters/ButlerAPI'
 class HouseholdForm extends React.Component {
 
   state = {
-    id: 0,
+    key: "",
+    newKey: "",
     name: "",
   }
 
@@ -19,7 +20,8 @@ class HouseholdForm extends React.Component {
 
   render() {
     const {
-      id,
+      key,
+      newKey,
       name,
     } = this.state
 
@@ -29,16 +31,16 @@ class HouseholdForm extends React.Component {
         <Modal.Content>
 
           <Grid columns={3}>
-            <Grid.Column>
+            <Grid.Column width={7}>
               <Form onSubmit={ (e) => {
                   e.preventDefault()
-                  this.props.findHousehold(id, this.props.userId)
+                  this.props.findHousehold(this.props.userId, key)
                 }}>
                 <Form.Field>
-                  <label>Choose an Existing Household by ID</label>
+                  <label>Choose an Existing Household by Key</label>
                   <input
-                    type="number" name="id"
-                    value={id}
+                    type="text" name="key"
+                    value={key}
                     onChange={this.handleInputChange}
                     />
                 </Form.Field>
@@ -46,15 +48,15 @@ class HouseholdForm extends React.Component {
               </Form>
             </Grid.Column>
 
-            <Grid.Column>
+            <Grid.Column width={2}>
               <Divider vertical>OR</Divider>
             </Grid.Column>
 
-            <Grid.Column>
+            <Grid.Column width={7}>
               <Form onSubmit={ (e) => {
                   e.preventDefault()
                   this.props.history.push("/home")
-                  this.props.newHousehold(name, this.props.userId)
+                  this.props.newHousehold(name, this.props.userId, newKey)
                 }}>
                 <Form.Field>
                   <label>Create a New Household</label>
@@ -64,7 +66,15 @@ class HouseholdForm extends React.Component {
                     onChange={this.handleInputChange}
                     />
                 </Form.Field>
+                <Form.Field>
+                  <input
+                    type="text" name="newKey" placeholder="Household Key"
+                    value={newKey}
+                    onChange={this.handleInputChange}
+                    />
+                </Form.Field>
                 <Button type="submit">Submit</Button>
+                <br/><br/><b>* key</b> will be used for other members to join your house
               </Form>
             </Grid.Column>
           </Grid>

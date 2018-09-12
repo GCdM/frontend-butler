@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Checkbox, Button } from 'semantic-ui-react'
+import { Form, Checkbox, Button, Message } from 'semantic-ui-react'
 
 class SignUpForm extends React.Component {
 
@@ -7,6 +7,8 @@ class SignUpForm extends React.Component {
     username: "",
     displayName: "",
     password: "",
+    tc: false,
+    errors: [],
   }
 
   handleInputChange = (event) => {
@@ -15,8 +17,46 @@ class SignUpForm extends React.Component {
     })
   }
 
+  handleTC = (e) => {
+    this.setState({
+      tc: !this.state.tc
+    })
+  }
+
   termsAndConditions = () => {
-    alert("Terms and Conditions: Don't be a dick")
+    alert("Terms & Conditions: Don't be a dick")
+  }
+
+  formSubmit = (e) => {
+    e.preventDefault()
+
+    if (this.validateSubmit()) {
+      this.props.action(this.state.username, this.state.displayName, this.state.password)
+    }
+  }
+
+  validateSubmit = () => {
+    const errors = []
+
+    if (this.state.username.length < 3) {
+      errors.push("Username must have at least 3 characters")
+    }
+    if (this.state.displayName.length < 2) {
+      errors.push("Display Name must have at least 2 characters")
+    }
+    if (this.state.password.length < 5) {
+      errors.push("Password must have at least 5 characters")
+    }
+    if (!this.state.tc) {
+      errors.push("You must agree to the Terms & Conditions")
+    }
+
+    if (errors.length > 0) {
+      this.setState({ errors })
+      return false
+    } else {
+      return true
+    }
   }
 
   render() {
@@ -24,15 +64,14 @@ class SignUpForm extends React.Component {
       username,
       displayName,
       password,
+      tc,
+      errors,
     } = this.state
 
     return (
       <React.Fragment>
         <h2>Sign Up</h2>
-        <Form onSubmit={ (e) => {
-          e.preventDefault()
-          this.props.action(username, displayName, password)
-        }}>
+        <Form onSubmit={this.formSubmit}>
           <Form.Field>
             <label>Username</label>
             <input
@@ -56,10 +95,17 @@ class SignUpForm extends React.Component {
               value={password}
               onChange={this.handleInputChange}
             />
-        </Form.Field>
+          </Form.Field>
+          {
+            errors.length > 0
+            ?
+            <Message negative list={errors}></Message>
+            :
+            null
+          }
           <Form.Field>
-            <Checkbox />
-            <span>  I agree to the <a onClick={this.termsAndConditions}>Terms and Conditions</a></span>
+            <Checkbox checked={tc} onClick={this.handleTC}/>
+            <span>  I agree to the <a onClick={this.termsAndConditions}>Terms & Conditions</a></span>
           </Form.Field>
           <Button type="submit">Submit</Button>
         </Form>
