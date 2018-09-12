@@ -47,12 +47,28 @@ const getUserInfo = (userId) => {
 }
 
 //HOUSEHOLDS
-const createHousehold = (name) => {
-
+const createHousehold = (name, userId) => {
+  return fetch(urlBase + `/households`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      household: {
+        name,
+      },
+      user_id: userId,
+    })
+  }).then( resp => resp.json() )
 }
 
-const joinHousehold = (householdId) => {
-
+const joinHousehold = (householdId, userId) => {
+  return fetch(urlBase + `/households/${householdId}/${userId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then( resp => resp.json() )
 }
 
 const getHouseholdInfo = (householdId) => {

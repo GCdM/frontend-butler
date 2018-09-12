@@ -11,12 +11,18 @@ class UserPage extends React.Component {
     return (
       <Grid columns={4}>
         {
-          this.props.currentUserId !== this.props.viewedUserId ?
-
+          this.props.currentUserId !== this.props.viewedUserId
+          ?
           <Grid.Row>
             <Segment className="center" >
               <Image size="tiny" src={this.props.viewedUserImg} />
-              <h4>{this.props.viewedUserName}</h4>
+              {
+                this.props.viewedUserId
+                ?
+                <h4>{this.props.viewedUserName}</h4>
+                :
+                <p>You'll need a Household before you can start keeping track of your activities.<br/>You can join an existing Household or create a new one above.</p>
+              }
             </Segment>
           </Grid.Row>
           :
