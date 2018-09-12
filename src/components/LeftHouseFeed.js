@@ -3,27 +3,26 @@ import { connect } from 'react-redux'
 import { Tab } from 'semantic-ui-react'
 
 import EventCard from './cards/EventCard'
-import ExpenseCard from './cards/ExpenseCard'
+import ResponsibilityTab from './ResponsibilityTab'
 
 const LeftHouseFeed = (props) => {
 
   const eventCards = props.events.map( event => <EventCard event={event} housePage={true} /> )
-  const expenseCards = props.expenses.map( expense => <ExpenseCard expense={expense} housePage={true} /> )
 
   const panes = [
     { menuItem: 'Events', pane: eventCards },
-    { menuItem: 'Expenses', pane: expenseCards },
+    { menuItem: 'Responsibilities', pane: [<ResponsibilityTab responsibilities={props.responsibilities}/>] },
   ]
 
   return (
-    <Tab panes={panes} renderActiveOnly={false} />
+    <Tab menu={{ pointing: true }} panes={panes} renderActiveOnly={false} />
   )
 }
 
 function mapStateToProps(state) {
   return {
     events: state.household.events,
-    expenses: state.household.expenses,
+    responsibilities: state.household.responsibilities,
   }
 }
 export default connect(mapStateToProps)(LeftHouseFeed)

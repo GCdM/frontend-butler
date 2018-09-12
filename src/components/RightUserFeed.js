@@ -16,7 +16,7 @@ const RightUserFeed = (props) => {
   ]
 
   return (
-    <Tab panes={panes} renderActiveOnly={false} />
+    <Tab menu={{ pointing: true }} panes={panes} renderActiveOnly={false} />
   )
 }
 
