@@ -32,6 +32,7 @@ class HouseholdForm extends React.Component {
             <Grid.Column>
               <Form onSubmit={ (e) => {
                   e.preventDefault()
+                  this.props.findHousehold(id, this.props.userId)
                 }}>
                 <Form.Field>
                   <label>Choose an Existing Household by ID</label>
@@ -52,6 +53,7 @@ class HouseholdForm extends React.Component {
             <Grid.Column>
               <Form onSubmit={ (e) => {
                   e.preventDefault()
+                  this.props.newHousehold(name, this.props.userId)
                 }}>
                 <Form.Field>
                   <label>Create a New Household</label>
@@ -80,12 +82,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    findHousehold: (householdId) => {
-      joinHousehold(householdId)
+    findHousehold: (householdId, userId) => {
+      joinHousehold(householdId, userId)
         .then( window.location.reload() )
     },
-    newHousehold: (householdId) => {
-      createHousehold(householdId)
+    newHousehold: (householdName, userId) => {
+      createHousehold(householdName, userId)
         .then( window.location.reload() )
     },
   }

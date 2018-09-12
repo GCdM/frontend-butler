@@ -35,6 +35,10 @@
   margin: auto;
 }
 
+.ui.segment.center img{
+  margin: auto;
+}
+
 .float-left {
   float: left;
 }
