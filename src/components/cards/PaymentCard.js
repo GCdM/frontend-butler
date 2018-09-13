@@ -57,10 +57,10 @@ const PaymentCard = (props) => {
             <Image size="mini" src={props.viewedUserImg} avatar/>
           </Feed.Label>
           <Feed.Content>
-            <Feed.Summary>
-              {summary}{amount} to <a>{userName}</a>
+            <Feed.Summary className="payment-card">
+              {summary}{amount} to <a>{userName}</a> for
               <br/>
-              for {expenseTitle}
+              <u>{expenseTitle}</u>
             </Feed.Summary>
             <br/>
             <Feed.Date>

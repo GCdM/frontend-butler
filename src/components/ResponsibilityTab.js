@@ -41,6 +41,7 @@ class ResponsibilityTab extends React.Component {
           onChange={this.handleChange}
         >
         </Dropdown>
+        <br/>
         {
           this.props.currentUserId === this.props.viewedUserId
           ?

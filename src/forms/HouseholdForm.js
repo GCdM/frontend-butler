@@ -97,8 +97,8 @@ function mapDispatchToProps(dispatch) {
       joinHousehold(householdId, userId)
         .then( window.location.reload() )
     },
-    newHousehold: (householdName, userId) => {
-      createHousehold(householdName, userId)
+    newHousehold: (householdName, userId, newKey) => {
+      createHousehold(householdName, userId, newKey)
         .then( window.location.reload() )
     },
   }

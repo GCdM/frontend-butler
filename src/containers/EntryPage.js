@@ -1,9 +1,9 @@
 import React from 'react'
-import { Container, Tab } from 'semantic-ui-react'
+import { Container, Tab, Image } from 'semantic-ui-react'
 
 import SignUpForm from '../forms/SignUpForm'
 import LoginForm from '../forms/LoginForm'
-import logo from '../logo.svg'
+import logo from '../logo.png'
 
 class EntryPage extends React.Component {
 
@@ -15,12 +15,13 @@ class EntryPage extends React.Component {
 
     return (
       <Container>
-        <img src={logo} alt="Butler logo" style={{width: 200}}/>
-        <h1>Butler</h1>
+        <br/>
+        <Image src={logo} size="large" circular centered/>
+        <h1>Butlr</h1>
+        <p>Welcome to Butlr!<br/> Our mission is to help those living together keep neat notes of events, expenses, and chores.<br/> Sign up with your roommates and start getting your house in order!</p>
+        <br/><br/>
         <Tab menu={{ fluid: true, vertical: true }} panes={panes} />
-        <br/>
-        <p>Description of the website with a brief overview of functionality, aim, and any disclaimers. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <br/>
+        <br/><br/>
       </Container>
     )
   }
